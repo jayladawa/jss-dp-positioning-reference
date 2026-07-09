@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSS × DP — Positioning Reference</title>
+<style>
+  :root{
+    --ink:#16202E;
+    --ink-soft:#3A4757;
+    --paper:#FBFAF7;
+    --card:#FFFFFF;
+    --profit:#157F52;
+    --profit-soft:#E4F1EA;
+    --jss:#2A4B7C;
+    --jss-soft:#E7EDF6;
+    --muted:#9AA1A9;
+    --muted-soft:#EFEDE8;
+    --line:#DBD7CE;
+    --signal:#A6791F;
+    --signal-soft:#F5EEDD;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    padding:32px 16px;
+  }
+  .page{
+    max-width:840px;
+    margin:0 auto 34px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:44px 48px 40px;
+    box-shadow:0 1px 0 rgba(22,32,46,.04),0 12px 34px rgba(22,32,46,.06);
+  }
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--jss);
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);}
+  .eyebrow .pg{color:var(--muted);font-weight:600;letter-spacing:.14em;}
+
+  h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;
+    font-size:26px;
+    line-height:1.25;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+
+  /* Hero positioning statement */
+  .statement{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:23px;
+    line-height:1.42;
+    color:var(--ink);
+    margin:6px 0 4px;
+    border-left:4px solid var(--profit);
+    padding:6px 0 6px 22px;
+    letter-spacing:-.005em;
+  }
+  .statement .hl{color:var(--profit);font-style:italic;}
+  .statement .hlj{color:var(--jss);font-style:italic;}
+  .sub{
+    color:var(--ink-soft);
+    font-size:13.5px;
+    margin:14px 0 4px;
+    padding-left:22px;
+  }
+
+  h2{
+    font-size:12px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink);
+    font-weight:800;
+    margin:30px 0 12px;
+  }
+
+  p{margin:0 0 10px;font-size:13.5px;color:var(--ink-soft);}
+
+  /* Role chips */
+  .roles{display:flex;gap:14px;flex-wrap:wrap;margin:4px 0 4px;}
+  .role{
+    flex:1;min-width:230px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:14px 16px;
+    background:var(--paper);
+  }
+  .role .tag{
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:800;color:var(--jss);margin-bottom:5px;
+  }
+  .role h3{margin:0 0 4px;font-size:15px;font-weight:700;color:var(--ink);}
+  .role p{margin:0;font-size:12.5px;}
+
+  /* Highlight callout */
+  .callout{
+    background:var(--profit-soft);
+    border:1px solid #BFE0CD;
+    border-radius:5px;
+    padding:13px 16px;
+    margin:14px 0 4px;
+    font-size:13.5px;
+    color:#0F4F34;
+  }
+  .callout strong{color:var(--profit);}
+
+  /* The exchange strip */
+  .exchange{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;}
+  .ex-col{
+    flex:1;min-width:250px;border:1px solid var(--line);
+    border-radius:5px;padding:14px 16px;background:var(--card);
+  }
+  .ex-col.give{border-top:3px solid var(--jss);}
+  .ex-col.get{border-top:3px solid var(--profit);}
+  .ex-col .lbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:8px;}
+  .give .lbl{color:var(--jss);}
+  .get .lbl{color:var(--profit);}
+  ul.tight{margin:0;padding-left:16px;}
+  ul.tight li{font-size:12.5px;color:var(--ink-soft);margin-bottom:4px;}
+
+  /* Diagram frame */
+  .figure{margin:8px 0 2px;}
+  .figure svg{width:100%;height:auto;display:block;}
+  .cap{font-size:11px;color:var(--muted);text-align:center;margin-top:6px;letter-spacing:.02em;}
+
+  /* Proof cards */
+  .proof{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 2px;}
+  .pcard{flex:1;min-width:230px;border:1px solid var(--line);border-radius:5px;padding:14px 16px;background:var(--paper);}
+  .pcard .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .pcard h3{margin:0;font-size:14px;font-weight:700;color:var(--ink);}
+  .pcard p{margin:0;font-size:12.5px;}
+  .conf{font-size:9.5px;letter-spacing:.08em;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:20px;}
+  .conf.hi{background:var(--profit-soft);color:var(--profit);}
+  .conf.med{background:var(--signal-soft);color:var(--signal);}
+
+  .insight{
+    border-left:3px solid var(--ink);
+    padding:2px 0 2px 16px;margin:6px 0 16px;
+  }
+  .insight h3{margin:0 0 4px;font-size:15px;font-weight:800;color:var(--ink);}
+  .insight p{margin:0;font-size:13px;}
+
+  .foot{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);
+    font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+
+  @media (max-width:560px){
+    body{padding:16px 8px;}
+    .page{padding:28px 22px;}
+    .statement{font-size:19px;}
+    h1{font-size:22px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{box-shadow:none;border:none;margin:0;max-width:none;padding:34px 40px;}
+    .page + .page{page-break-before:always;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<section class="page">
+  <div class="eyebrow">Positioning &middot; JSS × DP <span class="pg">Reference &middot; Page 1 / 2</span></div>
+
+  <h1>How we position JSS with DP</h1>
+
+  <div class="statement">
+    JSS is DP's <span class="hlj">specialized dealer</span> — the <span class="hl">only dealer DP earns a profit share from.</span>
+    We run front-line device sales like any dealer, but use our own application to own the long-term renewal business.
+  </div>
+  <div class="sub">All we ask of DP: <strong>database access</strong> and <strong>background support</strong>. Everything else — the app, the channel, the operations — we own.</div>
+
+  <h2>What "specialized dealer" actually means</h2>
+  <p>It is not a software-vendor pitch. We enter DP's world in a language DP already understands — as a dealer — but play two roles at once.</p>
+  <div class="roles">
+    <div class="role">
+      <div class="tag">Role 1 — Dealer</div>
+      <h3>The front face</h3>
+      <p>We issue and sell new devices on the ground, exactly like DP's existing dealers. Fresh issuance is the visible, everyday activity.</p>
+    </div>
+    <div class="role">
+      <div class="tag">Role 2 — Distributor</div>
+      <h3>The network builder</h3>
+      <p>We onboard sub-dealers in areas DP can't directly reach, run them on our application, and route their renewals back through us.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    The difference from every other dealer in one line: <strong>DP has a stake in this dealership and shares the profit.</strong>
+    For all other dealers, DP earns nothing on the margin — so DP will naturally prioritise the one it profits from.
+  </div>
+
+  <h2>Stakeholder relationships</h2>
+  <div class="figure">
+    <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing DP at the top with two dealer branches: regular dealers with no profit share, and JSS as a specialized dealer with a profit-share loop, feeding sub-dealers and end customers.">
+      <defs>
+        <marker id="arrGrey" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+          <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#9AA1A9"/>
+        </marker>
+        <marker id="arrJss" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+          <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#2A4B7C"/>
+        </marker>
+        <marker id="arrProfit" markerWidth="10" markerHeight="10" refX="7.5" refY="3.4" orient="auto">
+          <path d="M0,0 L7.6,3.4 L0,6.8 Z" fill="#157F52"/>
+        </marker>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#157F52" flood-opacity="0.35"/>
+        </filter>
+      </defs>
+
+      <!-- DP node -->
+      <rect x="290" y="20" width="180" height="60" rx="7" fill="#16202E"/>
+      <text x="380" y="45" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="Georgia,serif">DP</text>
+      <text x="380" y="64" text-anchor="middle" fill="#C6CDd6" font-size="10.5">Database &middot; Authority &middot; Device supply</text>
+
+      <!-- Left branch: other dealers (grey) -->
+      <path d="M320,80 C250,110 200,120 175,150" fill="none" stroke="#9AA1A9" stroke-width="1.6" marker-end="url(#arrGrey)"/>
+      <rect x="70" y="152" width="210" height="54" rx="6" fill="#fff" stroke="#DBD7CE" stroke-width="1.4"/>
+      <text x="175" y="175" text-anchor="middle" fill="#3A4757" font-size="13" font-weight="700">Other dealers</text>
+      <text x="175" y="192" text-anchor="middle" fill="#9AA1A9" font-size="10">many, across Karnataka RTOs</text>
+      <text x="150" y="120" text-anchor="middle" fill="#9AA1A9" font-size="10" font-style="italic">no profit to DP</text>
+
+      <!-- Right branch: JSS specialized dealer (steel) -->
+      <path d="M448,80 C560,108 600,120 590,150" fill="none" stroke="#2A4B7C" stroke-width="1.8" marker-end="url(#arrJss)"/>
+      <rect x="470" y="150" width="230" height="66" rx="7" fill="#E7EDF6" stroke="#2A4B7C" stroke-width="1.8"/>
+      <text x="585" y="176" text-anchor="middle" fill="#16202E" font-size="14" font-weight="800">JSS — Specialized dealer</text>
+      <text x="585" y="196" text-anchor="middle" fill="#2A4B7C" font-size="10.5">Dealer + Distributor &middot; powered by own app</text>
+
+      <!-- PROFIT-SHARE LOOP (signature element) -->
+      <path d="M470,175 C420,150 420,110 452,86" fill="none" stroke="#157F52" stroke-width="3.2"
+            marker-end="url(#arrProfit)" filter="url(#glow)"/>
+      <rect x="372" y="112" width="118" height="24" rx="12" fill="#157F52"/>
+      <text x="431" y="128" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">▲ PROFIT SHARE</text>
+
+      <!-- reciprocal support arrow DP -> JSS -->
+      <path d="M462,92 C500,116 505,140 520,148" fill="none" stroke="#2A4B7C" stroke-width="1.4"
+            stroke-dasharray="4 3" marker-end="url(#arrJss)"/>
+      <text x="558" y="118" text-anchor="middle" fill="#2A4B7C" font-size="9.5">database + support</text>
+
+      <!-- JSS -> sub-dealers -->
+      <path d="M585,216 L585,268" fill="none" stroke="#2A4B7C" stroke-width="1.6" marker-end="url(#arrJss)"/>
+      <rect x="470" y="270" width="230" height="50" rx="6" fill="#fff" stroke="#2A4B7C" stroke-width="1.3"/>
+      <text x="585" y="292" text-anchor="middle" fill="#16202E" font-size="12.5" font-weight="700">Sub-dealers (onboarded by us)</text>
+      <text x="585" y="308" text-anchor="middle" fill="#2A4B7C" font-size="9.5">run on our app &middot; renewals routed through us</text>
+
+      <!-- Other dealers -> end customers -->
+      <path d="M175,206 L175,268" fill="none" stroke="#9AA1A9" stroke-width="1.5" marker-end="url(#arrGrey)"/>
+      <!-- Sub-dealers -> end customers -->
+      <path d="M585,320 L585,368" fill="none" stroke="#2A4B7C" stroke-width="1.6" marker-end="url(#arrJss)"/>
+
+      <!-- End customer rows -->
+      <rect x="70" y="270" width="210" height="50" rx="6" fill="#F4F2EC" stroke="#DBD7CE" stroke-width="1.2"/>
+      <text x="175" y="291" text-anchor="middle" fill="#3A4757" font-size="12" font-weight="700">End customers</text>
+      <text x="175" y="308" text-anchor="middle" fill="#9AA1A9" font-size="9.5">cab owners &amp; aggregators</text>
+
+      <rect x="470" y="370" width="230" height="50" rx="6" fill="#F4F2EC" stroke="#DBD7CE" stroke-width="1.2"/>
+      <text x="585" y="391" text-anchor="middle" fill="#3A4757" font-size="12" font-weight="700">End customers</text>
+      <text x="585" y="408" text-anchor="middle" fill="#9AA1A9" font-size="9.5">cab owners &amp; aggregators</text>
+
+      <!-- legend -->
+      <line x1="70" y1="445" x2="96" y2="445" stroke="#157F52" stroke-width="3"/>
+      <text x="102" y="449" fill="#3A4757" font-size="10">Profit / value that flows back to DP (unique to JSS)</text>
+      <line x1="430" y1="445" x2="456" y2="445" stroke="#9AA1A9" stroke-width="2"/>
+      <text x="462" y="449" fill="#3A4757" font-size="10">Ordinary supply chain — DP earns nothing</text>
+    </svg>
+  </div>
+  <div class="cap">DP profits only from the JSS branch. That single green loop is why DP backs us over any other dealer.</div>
+
+  <h2>The exchange</h2>
+  <div class="exchange">
+    <div class="ex-col give">
+      <div class="lbl">What we need from DP</div>
+      <ul class="tight">
+        <li>Access to the deployed device database</li>
+        <li>Background support &amp; prioritisation</li>
+        <li>Nothing that costs DP margin or cash</li>
+      </ul>
+    </div>
+    <div class="ex-col get">
+      <div class="lbl">What DP gets in return</div>
+      <ul class="tight">
+        <li>A direct profit share on this dealership</li>
+        <li>Seamless operations: payment consolidation, dealer management in one portal</li>
+        <li>A platform that runs renewals long after the government contract ends</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>JSS × DP Positioning — internal strategy reference</span>
+    <span>Anchored on the "specialized dealer" model discussed at Seven Bains</span>
+  </div>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section class="page">
+  <div class="eyebrow">The Logic &middot; Why this wins <span class="pg">Reference &middot; Page 2 / 2</span></div>
+
+  <h1>Why the model holds — and why the app is the point</h1>
+
+  <div class="insight">
+    <h3>1. The app is not for the end user — it's for owning renewals.</h3>
+    <p>Most of the base is individual cab owners who buy mainly for the certificate; the app is a genuine need only for aggregators. So end-user demand isn't the reason to build it. The app's real job is operational control and capturing the recurring renewal revenue.</p>
+  </div>
+
+  <h2>How the money actually works</h2>
+  <div class="figure">
+    <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing dealers driving fresh device sales into an installed base, and the application capturing year-2-plus renewals directly as recurring revenue, with a small cut looping back to dealers.">
+      <defs>
+        <marker id="a2Ink" markerWidth="10" markerHeight="10" refX="7.5" refY="3.4" orient="auto">
+          <path d="M0,0 L7.6,3.4 L0,6.8 Z" fill="#3A4757"/>
+        </marker>
+        <marker id="a2Profit" markerWidth="11" markerHeight="11" refX="8" refY="3.6" orient="auto">
+          <path d="M0,0 L8,3.6 L0,7.2 Z" fill="#157F52"/>
+        </marker>
+        <marker id="a2Grey" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+          <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#9AA1A9"/>
+        </marker>
+      </defs>
+
+      <!-- Column 1: Dealers -->
+      <rect x="24" y="70" width="188" height="88" rx="7" fill="#E7EDF6" stroke="#2A4B7C" stroke-width="1.6"/>
+      <text x="118" y="98" text-anchor="middle" fill="#16202E" font-size="13.5" font-weight="800">Dealers &amp; sub-dealers</text>
+      <text x="118" y="118" text-anchor="middle" fill="#2A4B7C" font-size="10.5">the acquisition channel</text>
+      <text x="118" y="138" text-anchor="middle" fill="#3A4757" font-size="10.5" font-style="italic">Year 1 · fresh issuance</text>
+
+      <!-- Column 2: Installed base -->
+      <rect x="286" y="70" width="188" height="88" rx="7" fill="#16202E"/>
+      <text x="380" y="100" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="800">Installed device base</text>
+      <text x="380" y="120" text-anchor="middle" fill="#C6CDD6" font-size="10.5">grows with every new sale</text>
+      <text x="380" y="138" text-anchor="middle" fill="#C6CDD6" font-size="10.5">the recurring asset</text>
+
+      <!-- Column 3: App captures renewals -->
+      <rect x="548" y="70" width="188" height="88" rx="7" fill="#E4F1EA" stroke="#157F52" stroke-width="2"/>
+      <text x="642" y="98" text-anchor="middle" fill="#0F4F34" font-size="13.5" font-weight="800">Our application</text>
+      <text x="642" y="118" text-anchor="middle" fill="#157F52" font-size="10.5">captures renewals directly</text>
+      <text x="642" y="138" text-anchor="middle" fill="#157F52" font-size="10.5" font-weight="700" font-style="italic">Year 2+ · recurring ₹</text>
+
+      <!-- flow arrows -->
+      <path d="M212,114 L282,114" fill="none" stroke="#3A4757" stroke-width="1.8" marker-end="url(#a2Ink)"/>
+      <text x="247" y="105" text-anchor="middle" fill="#3A4757" font-size="9.5">new devices</text>
+      <path d="M474,114 L544,114" fill="none" stroke="#157F52" stroke-width="2.4" marker-end="url(#a2Profit)"/>
+      <text x="509" y="105" text-anchor="middle" fill="#157F52" font-size="9.5" font-weight="700">renewals</text>
+
+      <!-- no intermediary tag -->
+      <rect x="556" y="176" width="172" height="24" rx="12" fill="#157F52"/>
+      <text x="642" y="192" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="800">money lands directly — no middleman</text>
+
+      <!-- small cut back to dealers (dashed loop) -->
+      <path d="M640,200 C560,250 250,255 150,200 L130,170" fill="none" stroke="#9AA1A9" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a2Grey)"/>
+      <text x="385" y="272" text-anchor="middle" fill="#9AA1A9" font-size="10" font-style="italic">a small renewal cut loops back — just enough to keep dealers driving fresh sales</text>
+
+      <text x="24" y="40" fill="#3A4757" font-size="11" font-weight="800" letter-spacing="0.06em">FRESH-SALES ENGINE</text>
+      <text x="736" y="40" text-anchor="end" fill="#157F52" font-size="11" font-weight="800" letter-spacing="0.06em">RENEWAL ENGINE</text>
+    </svg>
+  </div>
+  <div class="cap">Dealers are the channel for acquisition. The app is the engine for retention — and retention is where the durable money is.</div>
+
+  <div class="insight" style="border-color:#157F52;">
+    <h3>2. Whoever owns the app owns the renewals.</h3>
+    <p>This isn't theory — the market already runs this way. The players who control the software keep the recurring revenue; the ones who don't, lose it. Positioning as DP's app-powered specialized dealer puts us on the winning side of that split.</p>
+  </div>
+
+  <h2>Market proof</h2>
+  <div class="proof">
+    <div class="pcard">
+      <div class="ph"><h3>Kevin's model</h3><span class="conf med">Inferred · Med</span></div>
+      <p>White-labels his own app, onboards dealers as a distributor, and uses them purely to drive fresh sales. Renewals are captured through his app straight into his account; dealers get only a small cut to stay motivated.</p>
+    </div>
+    <div class="pcard">
+      <div class="ph"><h3>Blackbox (Maharashtra)</h3><span class="conf med">Inferred · Med</span></div>
+      <p>Runs its own application and undercuts dealers entirely — managing all renewals in-house. By giving dealers nothing on renewals, it keeps the full recurring stream.</p>
+    </div>
+    <div class="pcard">
+      <div class="ph"><h3>iTriangle signal</h3><span class="conf hi">Confirmed · High</span></div>
+      <p>Confirmed that most individual buyers purchase mainly for the certificate — which is exactly why end-user app demand is the wrong thing to optimise for.</p>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:22px;border-color:#A6791F;">
+    <h3>3. The long game: after the government contract, the app runs everything.</h3>
+    <p>Once the current contract cycle ends, operations, auto-renewals and dealer management all move onto the platform. The app stops being a feature and becomes the thing the whole business depends on — which is precisely why DP should want to be inside the dealership that owns it.</p>
+  </div>
+
+  <div class="foot">
+    <span>Confidence: HIGH = stated / confirmed · MED = inferred from market observation</span>
+    <span>Reference only — not a commercial offer</span>
+  </div>
+</section>
+
+</body>
+</html>
